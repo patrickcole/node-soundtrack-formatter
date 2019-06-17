@@ -9,18 +9,28 @@
   </head>
   <body>
     <h1>Soundtrack Formatter Tool</h1>
-    <form>
-      <fieldset>
-        <legend>Unformatted Content</legend>
-        <textarea id="content_unformatted" name="content_unformatted"></textarea>
-      </fieldset>
-      <fieldset>
-          <button>Submit</button>
-      </fieldset>
-    </form>
+    <textarea id="content_unformatted" name="content_unformatted"></textarea>
+    <button id="controls_submit">Submit</button>
 
-    <div id="content_formatted">
-      
-    </div>
+    <textarea id="content_formatted"></textarea>
+
+    <script>
+      let submitBtn = document.querySelector('#controls_submit');
+      let unformattedEl = document.querySelector('#content_unformatted');
+      let formattedEl = document.querySelector('#content_formatted');
+
+      async function submitData() {
+
+        let json = { 
+          method: 'POST', 
+          headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+          body: JSON.stringify({ content: unformattedEl.value}) 
+        };
+        let response = await fetch(`/format`, json);
+        let data = await response.json();
+        formattedEl.value = JSON.stringify(data);
+      }
+      submitBtn.addEventListener('click', submitData);
+    </script>
   </body>
 </html>

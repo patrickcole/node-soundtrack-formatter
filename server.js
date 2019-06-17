@@ -1,9 +1,18 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 app.post('/format', (req,res) => {
-  res.send('Formatted content');
+
+  let input = req.body;
+
+  let message = { response_back: `${input.content} received and we say hello back` };
+
+  res.json(message);
 });
 
 // Serve static files from the React app
