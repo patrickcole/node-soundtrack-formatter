@@ -1,4 +1,4 @@
-const titleBeforeTime = false;
+const titleBeforeTime = true;
 
 let input = ``;
 
@@ -126,13 +126,13 @@ for ( let index = 0; index < linesReversed.length; index++ ){
     title = thisLine.substr((tagStartIndex + 5), thisLine.length);
   }
   
-  //console.log( title );
+  console.log( title );
 
   let timeStartIndex = thisLine.indexOf('&amp;t=');
   let startAt = thisLine.substr((timeStartIndex + 7), thisLine.length);
   let startAtSeconds = startAt.substr(0, startAt.indexOf('s">'));
 
- 
+  console.log(timeStartIndex);
 
   if ( title !== '' && startAtSeconds !== '' ){
 
