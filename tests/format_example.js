@@ -1,4 +1,4 @@
-const formatter = require('./format');
+const formatter = require('../utils/format');
 
 let testDuration = "01:19:23";
 let testTracks = `Doom OST (Sound Canvas SC-155)
@@ -43,7 +43,7 @@ Composed by Robert Prince.
 <a class="yt-simple-endpoint style-scope yt-formatted-string" spellcheck="false" href="/watch?v=0gEkNVq1ct0&amp;list=PLHp5n26L7H0ialJ83UXuyRj-uTa6KH42e&amp;index=1&amp;t=4675s">1:17:55</a> Un51`;
 
 
-let durationInSeconds = formatter.formatDuration(testDuration);
+let durationInSeconds = formatter.formatTimestamp(testDuration);
 let tracks = formatter.formatTracks(testTracks, durationInSeconds);
 
 console.log( durationInSeconds - 11380 );

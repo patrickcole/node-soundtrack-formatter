@@ -3,16 +3,22 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 
-const formatter = require('./format');
+const formatter = require('./utils/format');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.post('/format', (req,res) => {
-  let input = req.body;
-  let duration = formatter.formatDuration(input.duration);
-  let tracks = formatter.formatTracks(input.content, duration);
-  let message = { tracks: tracks, duration: duration };
+
+  let item = req.body.items[0];
+  let video_duration = item.contentDetails.duration;
+  let video_duration_readable = formatter.formatDuration(video_duration);
+  let video_duration_in_seconds = formatter.formatTimestamp(video_duration_readable);
+
+  let video_description = item.snippet.description;
+  let tracks = formatter.formatTracks( video_description, video_duration_in_seconds );
+
+  let message = { tracks: tracks, duration: video_duration_in_seconds };
   res.json(message);
 });
 
