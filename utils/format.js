@@ -1,5 +1,3 @@
-const DOMParser = require('xmldom').DOMParser;
-
 // public so that the formatTracks method can access it:
 function utilityTimestamp( input ) {
   let duration_formatted = input.split(":");
