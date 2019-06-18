@@ -1,0 +1,71 @@
+{
+  "kind": "youtube#videoListResponse",
+  "etag": "\"Bdx4f4ps3xCOOo1WZ91nTLkRZ_c/zNTXdwjo5dP49QXWZROLAs5874w\"",
+  "pageInfo": {
+   "totalResults": 1,
+   "resultsPerPage": 1
+  },
+  "items": [
+   {
+    "kind": "youtube#video",
+    "etag": "\"Bdx4f4ps3xCOOo1WZ91nTLkRZ_c/QhxmBKpA-Td3TRZqS03nYoL3Y-0\"",
+    "id": "0gEkNVq1ct0",
+    "snippet": {
+     "publishedAt": "2013-09-28T22:37:34.000Z",
+     "channelId": "UC46807r_RiRjH8IU-h_DrDQ",
+     "title": "Doom Soundtrack [SC-155]",
+     "description": "Doom OST (Sound Canvas SC-155)\nComposed by Robert Prince.\n\n0:00 Intro\n0:08 At Doom's Gate\n1:47 The Imp's Song\n4:25 Dark Halls\n9:00 Kitchen Ace (And Taking Names)\n11:53 Suspense\n14:40 On The Hunt\n16:07 Demons On The Prey\n18:41 Sign Of Evil\n21:16 Hiding The Secrets\n23:37 Intermission From DOOM\n27:00 I Sawed The Demons\n29:36 The Demons From Adrian's Pen\n32:11 They're Going To Get You\n36:26 Sinister\n39:26 Waltz of the Demons\n41:14 Nobody Told Me About id\n44:12 Untitled\n45:51 Victory\n49:06 Donna To The Rescue\n51:06 Deep Into The Code\n53:11 Facing The Spider\n54:51 Bunny\n55:56 Un14\n57:03 Un17\n58:23 Un18\n59:24 We Die Young\n1:01:03 Man In The Box\n1:03:13 Dead and Bloated\n1:05:59 Sex Type Thing\n1:07:41 Un30\n1:09:01 Rusty Cage\n1:09:56 Rooster\n1:11:27 JunkHead\n1:13:20 Dirt\n1:15:43 God Smack\n1:17:55 Un51",
+     "thumbnails": {
+      "default": {
+       "url": "https://i.ytimg.com/vi/0gEkNVq1ct0/default.jpg",
+       "width": 120,
+       "height": 90
+      },
+      "medium": {
+       "url": "https://i.ytimg.com/vi/0gEkNVq1ct0/mqdefault.jpg",
+       "width": 320,
+       "height": 180
+      },
+      "high": {
+       "url": "https://i.ytimg.com/vi/0gEkNVq1ct0/hqdefault.jpg",
+       "width": 480,
+       "height": 360
+      },
+      "standard": {
+       "url": "https://i.ytimg.com/vi/0gEkNVq1ct0/sddefault.jpg",
+       "width": 640,
+       "height": 480
+      },
+      "maxres": {
+       "url": "https://i.ytimg.com/vi/0gEkNVq1ct0/maxresdefault.jpg",
+       "width": 1280,
+       "height": 720
+      }
+     },
+     "channelTitle": "VGameOSTs",
+     "tags": [
+      "doom",
+      "soundtrack",
+      "doom soundtrack",
+      "doom ost",
+      "bobby prince",
+      "doom music"
+     ],
+     "categoryId": "20",
+     "liveBroadcastContent": "none",
+     "localized": {
+      "title": "Doom Soundtrack [SC-155]",
+      "description": "Doom OST (Sound Canvas SC-155)\nComposed by Robert Prince.\n\n0:00 Intro\n0:08 At Doom's Gate\n1:47 The Imp's Song\n4:25 Dark Halls\n9:00 Kitchen Ace (And Taking Names)\n11:53 Suspense\n14:40 On The Hunt\n16:07 Demons On The Prey\n18:41 Sign Of Evil\n21:16 Hiding The Secrets\n23:37 Intermission From DOOM\n27:00 I Sawed The Demons\n29:36 The Demons From Adrian's Pen\n32:11 They're Going To Get You\n36:26 Sinister\n39:26 Waltz of the Demons\n41:14 Nobody Told Me About id\n44:12 Untitled\n45:51 Victory\n49:06 Donna To The Rescue\n51:06 Deep Into The Code\n53:11 Facing The Spider\n54:51 Bunny\n55:56 Un14\n57:03 Un17\n58:23 Un18\n59:24 We Die Young\n1:01:03 Man In The Box\n1:03:13 Dead and Bloated\n1:05:59 Sex Type Thing\n1:07:41 Un30\n1:09:01 Rusty Cage\n1:09:56 Rooster\n1:11:27 JunkHead\n1:13:20 Dirt\n1:15:43 God Smack\n1:17:55 Un51"
+     }
+    },
+    "contentDetails": {
+     "duration": "PT1H19M24S",
+     "dimension": "2d",
+     "definition": "hd",
+     "caption": "false",
+     "licensedContent": false,
+     "projection": "rectangular"
+    }
+   }
+  ]
+ }
