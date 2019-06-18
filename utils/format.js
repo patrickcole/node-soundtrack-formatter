@@ -75,6 +75,9 @@ module.exports = {
           time = line.substring(digitsFollowedByColon.index);
         }
     
+        // trim whitespace from title:
+        title = title.trim();
+
         // filter out any ms in the time string:
         let time_filterOutMS = time.split('.');
         let time_values = time_filterOutMS[0];

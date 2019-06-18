@@ -1,9 +1,16 @@
+
+
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 
 const formatter = require('./utils/format');
+
+
+const Prism = require('prismjs');
+let loadLanguages = require('prismjs/components/');
+loadLanguages(['json']);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -19,7 +26,11 @@ app.post('/format', (req,res) => {
   let tracks = formatter.formatTracks( video_description, video_duration_in_seconds );
 
   let message = { tracks: tracks, duration: video_duration_in_seconds };
-  res.json(message);
+
+  let html = Prism.highlight(JSON.stringify(message, undefined, 2), Prism.languages.json, 'json');
+
+  let payload = { json: message, html: html };
+  res.json(payload);
 });
 
 // Serve static files from the React app
