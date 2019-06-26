@@ -18,7 +18,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/video/:embed', (req,res) => {
 
-  res.json({ message: `Requested video id: ${youtube(req.params.embed)}`})
+  youtube(req.params.embed)
+    .then( (message) => {
+      res.json( { success: true, message: message } )
+    })
+    .catch( (error) => {
+      res.json( { success: false, message: error } );
+    })
 });
 
 app.post('/format', (req,res) => {
