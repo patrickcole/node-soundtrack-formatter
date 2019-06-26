@@ -16,20 +16,8 @@ loadLanguages(['json']);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/video/:embed', (req,res) => {
+function handleAPIData(item) {
 
-  youtube(req.params.embed)
-    .then( (message) => {
-      res.json( { success: true, message: message } )
-    })
-    .catch( (error) => {
-      res.json( { success: false, message: error } );
-    })
-});
-
-app.post('/format', (req,res) => {
-
-  let item = req.body.items[0];
   let video_duration = item.contentDetails.duration;
   let video_duration_readable = formatter.formatDuration(video_duration);
   let video_duration_in_seconds = formatter.formatTimestamp(video_duration_readable);
@@ -41,7 +29,34 @@ app.post('/format', (req,res) => {
 
   let html = Prism.highlight(JSON.stringify(message, undefined, 2), Prism.languages.json, 'json');
 
-  let payload = { json: message, html: html };
+  return { json: message, html: html };
+}
+
+app.get('/video', (req,res) => {
+  res.json({ success: false, message: "Please enter a valid video id" });
+});
+
+app.get('/video/:embed', (req,res) => {
+
+  if ( req.params.embed !== "" ){
+    youtube(req.params.embed)
+    .then( (item) => {
+      
+      let payload = handleAPIData(item);
+      res.json(payload);
+    })
+    .catch( (error) => {
+      res.json( { success: false, message: error } );
+    })
+  } else {
+    res.json({ success: false, message: "Please enter a valid video id" });
+  }
+});
+
+app.post('/format', (req,res) => {
+
+  let item = req.body.items[0];
+  let payload = handleAPIData(item);
   res.json(payload);
 });
 

@@ -117,7 +117,8 @@ const youtube = (embed) => {
           if ( err ) reject(`Server is reporting an error: ${err}`);
 
           let videos = response.data.items;
-          resolve(videos[0].snippet.description);
+          if ( videos.length < 1 ) reject(`Server is reporting that no items were found`);
+          resolve(videos[0]);
         })
       })
     })

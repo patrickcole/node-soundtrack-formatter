@@ -14,6 +14,13 @@
     </header>
     <main>
       <article>
+        <p>
+        <label>
+          <span>Video Id</span>
+          <input type="text" id="content_id" name="content_id" />
+        </label>
+      </p>
+      <p>
         <label>
           <span>API Response</span>
           <textarea id="content_unformatted" readonly name="content_unformatted">{
@@ -94,7 +101,10 @@
            }
            </textarea>
         </label>
+      </p>
+
         <footer>
+          <button id="controls_video_submit">Get Video Data</button>
           <button id="controls_submit">Format JSON</button>
         </footer>
       </article>
@@ -106,8 +116,20 @@
     <script>
 
       let submitBtn = document.querySelector('#controls_submit');
+      let videoSubmitBtn = document.querySelector('#controls_video_submit');
+
+      let videoIdEl = document.querySelector('#content_id');
       let unformattedEl = document.querySelector('#content_unformatted');
+
       let formattedEl = document.querySelector('#content_formatted');
+
+      async function getVideoData() {
+
+        let video_id = videoIdEl.value;
+        let response = await fetch(`/video/${video_id}`);
+        let data = await response.json();
+        formattedEl.innerHTML = data.html;
+      }
 
       async function submitData() {
 
@@ -123,7 +145,9 @@
         let data = await response.json();
         formattedEl.innerHTML = data.html;
       }
+
       submitBtn.addEventListener('click', submitData);
+      videoSubmitBtn.addEventListener('click', getVideoData);
     </script>
   </body>
 </html>
