@@ -16,8 +16,8 @@
       <article>
         <p>
         <label>
-          <span>Video Id</span>
-          <input type="text" id="content_id" name="content_id" />
+          <span>Video URL</span>
+          <input type="text" id="content_id" name="content_id" value="https://www.youtube.com/watch?v=l-2KUJiC7I8&list=PLHp5n26L7H0iJHp_7-VIgdftsSQI1nw4f&index=6"/>
         </label>
       </p>
       <p>
@@ -109,6 +109,7 @@
         </footer>
       </article>
       <aside>
+        <span id="video_id_output"></span>
         <pre class="language-json"><code id="content_formatted">Formatted JSON will display here</code></pre>
       </aside>
     </main>
@@ -118,14 +119,21 @@
       let submitBtn = document.querySelector('#controls_submit');
       let videoSubmitBtn = document.querySelector('#controls_video_submit');
 
-      let videoIdEl = document.querySelector('#content_id');
+      let videoUrlEl = document.querySelector('#content_id');
       let unformattedEl = document.querySelector('#content_unformatted');
 
       let formattedEl = document.querySelector('#content_formatted');
 
       async function getVideoData() {
 
-        let video_id = videoIdEl.value;
+        let video_url = videoUrlEl.value;
+
+        let video_id = /v=([a-zA-Z0-9_-]+)/.exec(video_url);
+        console.log(video_id);
+
+        let videoIdEl = document.querySelector('#video_id_output');
+        videoIdEl.innerHTML = video_id[1];
+
         let response = await fetch(`/video/${video_id}`);
         let data = await response.json();
         formattedEl.innerHTML = data.html;
