@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const formatter = require('./utils/format');
+const youtube = require('./utils/youtube');
 
 
 const Prism = require('prismjs');
@@ -14,6 +15,11 @@ loadLanguages(['json']);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.get('/video/:embed', (req,res) => {
+
+  res.json({ message: `Requested video id: ${youtube(req.params.embed)}`})
+});
 
 app.post('/format', (req,res) => {
 
