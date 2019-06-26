@@ -55,7 +55,7 @@ module.exports = {
     for ( let i = 0; i < lines.length; i++ ) {
 
       let line = lines[i];
-      let digitsFollowedByColon = /\d{1,2}[\:]/.exec(line);
+      let digitsFollowedByColon = /\d{1,2}[\:]\d{1,2}/.exec(line);
       let alphaChars = /[a-zA-Z]/.exec(line);
 
       if ( digitsFollowedByColon && alphaChars ) {
