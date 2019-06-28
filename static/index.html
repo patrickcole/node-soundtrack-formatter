@@ -15,6 +15,12 @@
     <main>
       <article>
         <p>
+          <label>
+            <span>Access Key</span>
+            <textarea id="access_key"></textarea>
+          </label>
+        </p>
+        <p>
         <label>
           <span>Video URL</span>
           <input type="text" id="content_id" name="content_id" value="https://www.youtube.com/watch?v=l-2KUJiC7I8&list=PLHp5n26L7H0iJHp_7-VIgdftsSQI1nw4f&index=6"/>
@@ -109,40 +115,56 @@
         </footer>
       </article>
       <aside>
-        <span id="video_id_output"></span>
-        <pre class="language-json"><code id="content_formatted">Formatted JSON will display here</code></pre>
+
+        <p><input type="text" id="video_id_output" class="control-input" readonly /></p>
+        <p></p><input type="text" id="video_slug_output" class="control-input" data-key="slug" /></p>
+        <p></p><input type="text" id="video_title_output" class="control-input" data-key="title" /></p>
+
+        <pre class="language-json"><code id="content_formatted">{ "message": "No data yet" }</code></pre>
       </aside>
     </main>
 
+    <script src="prism.js"></script>
     <script>
+      
+      let video_data = { id: '', slug: '', title: '', tracks: [], duration: -1 };
 
       let submitBtn = document.querySelector('#controls_submit');
       let videoSubmitBtn = document.querySelector('#controls_video_submit');
-
       let videoUrlEl = document.querySelector('#content_id');
       let unformattedEl = document.querySelector('#content_unformatted');
-
       let formattedEl = document.querySelector('#content_formatted');
+      let videoIdEl = document.querySelector('#video_id_output');
+      let videoSlugEl = document.querySelector('#video_slug_output');
+      let videoTitleEl = document.querySelector('#video_title_output');
+
+      videoSlugEl.addEventListener('change', onInputUpdate);
+      videoTitleEl.addEventListener('change', onInputUpdate);
+
+      updateJSONPane();
 
       async function getVideoData() {
 
+        let accessKeyEl = document.querySelector('#access_key');
+        let access_key = accessKeyEl.value;
+        access_key = access_key.trim();
+
         let video_url = videoUrlEl.value;
-
         let video_id = /v=([a-zA-Z0-9_-]+)/.exec(video_url);
-        console.log(video_id);
+        let json = {
+          method: 'GET',
+          headers: { authorization: `Bearer ${access_key}` }
+        }
 
-        let videoIdEl = document.querySelector('#video_id_output');
-        videoIdEl.innerHTML = video_id[1];
-
-        let response = await fetch(`/video/${video_id}`);
+        let response = await fetch(`/video/${video_id[1]}`, json);
         let data = await response.json();
-        formattedEl.innerHTML = data.html;
+
+        onDataReceived(data);
       }
 
+      
       async function submitData() {
-
         let album_json = unformattedEl.value;
-
         let json = { 
           method: 'POST', 
           headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
@@ -151,7 +173,35 @@
 
         let response = await fetch(`/format`, json);
         let data = await response.json();
-        formattedEl.innerHTML = data.html;
+        onDataReceived(data);
+      }
+
+      function onDataReceived(data) {
+
+        if ( !data.success ) {
+          video_data = {...video_data, error: data.message };
+        } else {
+          video_data = data.json;
+          updateInputs();
+        }
+        
+        updateJSONPane();
+      }
+
+      function updateInputs() {
+        videoIdEl.value = video_data.embed;
+        videoSlugEl.value = video_data.slug;
+        videoTitleEl.value = video_data.title;
+      }
+
+      function onInputUpdate(e) {
+        video_data[e.currentTarget.dataset.key] = e.currentTarget.value;
+        updateJSONPane();
+      }
+
+      function updateJSONPane() {
+        formattedEl.innerHTML = JSON.stringify(video_data, null, 2);
+        Prism.highlightAll();
       }
 
       submitBtn.addEventListener('click', submitData);

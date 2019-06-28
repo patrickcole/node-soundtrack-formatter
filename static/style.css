@@ -75,3 +75,9 @@ textarea {
 pre {
   border-radius: 5px;
 }
+
+.control-input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.5rem;
+}

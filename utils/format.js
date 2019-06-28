@@ -87,7 +87,7 @@ module.exports = {
 
         currentDurationInSeconds = trackTimestampInSeconds;
 
-        tracks.push( { title: title, startAt: trackTimestampInSeconds, duration: track_duration } );
+        tracks.push( { title: title, playAt: trackTimestampInSeconds, duration: track_duration } );
       }
     }
 

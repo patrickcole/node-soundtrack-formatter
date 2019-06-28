@@ -2,3 +2,5 @@
 node_modules
 .git
 client_secret.json
+access.log
+jwt-key

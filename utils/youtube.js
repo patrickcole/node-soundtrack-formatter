@@ -3,7 +3,6 @@ var readline = require('readline');
 var {google} = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 
-
 var SCOPES = ['https://www.googleapis.com/auth/youtube.readonly'];
 var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
     process.env.USERPROFILE) + '/.credentials/';
@@ -65,37 +64,6 @@ function storeToken(token) {
   console.log('Token stored to ' + TOKEN_PATH);
 }
 
-
-/*
-fs.readFile('client_secret.json', (err, content) => {
-
-    if (err) {
-      return { message: `Error loading client secret file: ${err}` }
-    }
-
-    return authorize(JSON.parse(content), ( auth ) => {
-
-      let service = google.youtube('v3');
-      let query = {
-        auth: auth,
-        part: 'snippet,contentDetails',
-        id: embed
-      }
-      service.videos.list(query, (err, response) => {
-        if ( err ){
-          return { message: `The API returned an error: ${err}` }
-        }
-
-        let videos = response.data.items;
-
-        return { message: videos[0].snippet.description }
-        //console.log(videos[0].id);
-        //console.log(videos[0].snippet.description);
-        //console.log(videos[0].contentDetails.duration);
-      });
-    });
-  }
-*/
 
 const youtube = (embed) => {
   

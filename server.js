@@ -1,18 +1,33 @@
-
-
-const express = require('express');
+// node
 const path = require('path');
-const bodyParser = require('body-parser');
-const app = express();
+const fs = require('fs');
 
+// express
+const express = require('express');
+const bodyParser = require('body-parser');
+
+// logging
+const morgan = require('morgan');
+
+// security
+const helmet = require('helmet');
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
+
+// api utils:
+const slugify = require('slugify');
+
+// setup
+const app = express();
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'));
+
+// custom utilities
 const formatter = require('./utils/format');
 const youtube = require('./utils/youtube');
 
-
-const Prism = require('prismjs');
-let loadLanguages = require('prismjs/components/');
-loadLanguages(['json']);
-
+// apply middleware
+app.use(morgan('combined', { stream: accessLogStream }));
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -22,19 +37,57 @@ function handleAPIData(item) {
   let video_duration_readable = formatter.formatDuration(video_duration);
   let video_duration_in_seconds = formatter.formatTimestamp(video_duration_readable);
 
+  let video_title = item.snippet.title;
   let video_description = item.snippet.description;
   let tracks = formatter.formatTracks( video_description, video_duration_in_seconds );
 
-  let message = { tracks: tracks, duration: video_duration_in_seconds };
+  let video_slug = slugify(video_title).toLowerCase();
 
-  let html = Prism.highlight(JSON.stringify(message, undefined, 2), Prism.languages.json, 'json');
 
-  return { json: message, html: html };
+  let message = { title: video_title, slug: video_slug, embed: item.id, tracks: tracks, duration: video_duration_in_seconds };
+  return { success: true, json: message };
 }
 
-app.get('/video', (req,res) => {
+const checkJwt = jwt(
+  {
+    secret: jwksRsa.expressJwtSecret(
+      {
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: 'https://dev-ul4-xznf.auth0.com/.well-known/jwks.json'
+      }
+    ),
+    audience: 'https://node-soundtrack-formatter',
+    issuer: 'https://dev-ul4-xznf.auth0.com/',
+    algorithms: ['RS256']
+  }
+);
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'static')));
+
+app.post('/format', (req,res) => {
+
+  let item = req.body.items[0];
+  let payload = handleAPIData(item);
+  res.json(payload);
+});
+
+
+
+app.get('/video/', (req,res) => {
   res.json({ success: false, message: "Please enter a valid video id" });
 });
+
+app.use(checkJwt);
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).json({ success: false, message: 'Invalid security token'});
+  }
+});
+
+
 
 app.get('/video/:embed', (req,res) => {
 
@@ -53,15 +106,7 @@ app.get('/video/:embed', (req,res) => {
   }
 });
 
-app.post('/format', (req,res) => {
 
-  let item = req.body.items[0];
-  let payload = handleAPIData(item);
-  res.json(payload);
-});
-
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'static')));
 
 const port = process.env.port || 5000;
 app.listen( port, () => console.log(`The Express application is running and reporting on port ${port}`));
