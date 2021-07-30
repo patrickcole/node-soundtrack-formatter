@@ -14,6 +14,7 @@
     </header>
     <main>
       <article>
+        <h2>Using Video URL</h2>
         <p>
           <label>
             <span>Access Key</span>
@@ -23,95 +24,18 @@
         <p>
         <label>
           <span>Video URL</span>
-          <input type="text" id="content_id" name="content_id" value="https://www.youtube.com/watch?v=l-2KUJiC7I8&list=PLHp5n26L7H0iJHp_7-VIgdftsSQI1nw4f&index=6"/>
+          <input type="text" class="control-input" id="content_id" name="content_id" value="https://www.youtube.com/watch?v=S_LbbMNMzqU">
         </label>
       </p>
       <p>
         <label>
-          <span>API Response</span>
-          <textarea id="content_unformatted" readonly name="content_unformatted">{
-            "kind": "youtube#videoListResponse",
-            "etag": "\"Bdx4f4ps3xCOOo1WZ91nTLkRZ_c/wJhPkXrAAoiByknc7FSaStOks8Y\"",
-            "pageInfo": {
-             "totalResults": 1,
-             "resultsPerPage": 1
-            },
-            "items": [
-             {
-              "kind": "youtube#video",
-              "etag": "\"Bdx4f4ps3xCOOo1WZ91nTLkRZ_c/kaAEqZDzQ4Qq4JEm7dIvYKGI144\"",
-              "id": "PSv37HwwojU",
-              "snippet": {
-               "publishedAt": "2012-10-10T00:36:10.000Z",
-               "channelId": "UCzGclAFQIOXgcPYgqvjwA_g",
-               "title": "Simcity 4 Soundtrack",
-               "description": "*I do not own the rights to the music.\n-This is the track list in order of song played.\n-The times are from when the annotations take in (so they may be off by a few seconds).\n-Recommendations and comments are more than welcome.\n\n1-Bumper to Bumper 0:00:00\n2-The Morning Commute 0:7:10.7\n3-Wheels of Progress 0:11:53.8\n4-Deserted 0:17:54.1\n5-Metropolis 0:23:05.2\n6-ElectriCITY 0:28:10.0\n7-Floating Population 0:33:22.3\n8-Chain Reaction 0:38:35.4\n9-Rush Hour 0:44:53.8\n10-By The Bay 0:50:14.6\n11-The New Hood 0:56:20.6\n12-No Gridlock 1:01:37.4\n13-Re-Development 1:09:00.0\n14-Bohemian Street Jam 1:14:31.0\n15-Urban Underground 1:20:12.5\n16-Street Sweeper 1:25:18.6\n17-Crosswalk Talk 1:30:17.3\n18-Tarmack 1:35:21.1\n19-NightOwl 1:40:53.5\n20-EpiCenter 1:46:12.3\n21-Gritty City 1:52:34.6\n22-Zone System 1:58:08.1\n23-Transit Angst 2:01:42.6\n24-Landfill 2:06:23.9\n25-Oasis 2:11:40.2\n\nRegion music - \n26-Area 52 2:17:45.3\n27-Big Deep 2:25:22.3\n28-Arctica 2:28:15.9\n29-Above The Clouds 2:36:28.3\n30-Shape Shifter 2:40:22.1\n31-Terrain 2:47:57.3\n32-Without Form 2:53:29.4\n33-Taking Shape 2:59:59.6\n34-Primordial Dream 3:04:19.9\n35-Parallel View 3:09:40.9",
-               "thumbnails": {
-                "default": {
-                 "url": "https://i.ytimg.com/vi/PSv37HwwojU/default.jpg",
-                 "width": 120,
-                 "height": 90
-                },
-                "medium": {
-                 "url": "https://i.ytimg.com/vi/PSv37HwwojU/mqdefault.jpg",
-                 "width": 320,
-                 "height": 180
-                },
-                "high": {
-                 "url": "https://i.ytimg.com/vi/PSv37HwwojU/hqdefault.jpg",
-                 "width": 480,
-                 "height": 360
-                }
-               },
-               "channelTitle": "friendstype25",
-               "tags": [
-                "My",
-                "first",
-                "tag.",
-                "Music",
-                "Soundtrack",
-                "Track",
-                "Original",
-                "Game",
-                "Simcity4",
-                "Mayor",
-                "City",
-                "Region",
-                "OST",
-                "SimCity (Video Game Series)",
-                "Video Game (Industry)",
-                "all",
-                "full",
-                "3rd-party",
-                "Theme",
-                "Logging Time (Musical Album)",
-                "Sims"
-               ],
-               "categoryId": "10",
-               "liveBroadcastContent": "none",
-               "localized": {
-                "title": "Simcity 4 Soundtrack",
-                "description": "*I do not own the rights to the music.\n-This is the track list in order of song played.\n-The times are from when the annotations take in (so they may be off by a few seconds).\n-Recommendations and comments are more than welcome.\n\n1-Bumper to Bumper 0:00:00\n2-The Morning Commute 0:7:10.7\n3-Wheels of Progress 0:11:53.8\n4-Deserted 0:17:54.1\n5-Metropolis 0:23:05.2\n6-ElectriCITY 0:28:10.0\n7-Floating Population 0:33:22.3\n8-Chain Reaction 0:38:35.4\n9-Rush Hour 0:44:53.8\n10-By The Bay 0:50:14.6\n11-The New Hood 0:56:20.6\n12-No Gridlock 1:01:37.4\n13-Re-Development 1:09:00.0\n14-Bohemian Street Jam 1:14:31.0\n15-Urban Underground 1:20:12.5\n16-Street Sweeper 1:25:18.6\n17-Crosswalk Talk 1:30:17.3\n18-Tarmack 1:35:21.1\n19-NightOwl 1:40:53.5\n20-EpiCenter 1:46:12.3\n21-Gritty City 1:52:34.6\n22-Zone System 1:58:08.1\n23-Transit Angst 2:01:42.6\n24-Landfill 2:06:23.9\n25-Oasis 2:11:40.2\n\nRegion music - \n26-Area 52 2:17:45.3\n27-Big Deep 2:25:22.3\n28-Arctica 2:28:15.9\n29-Above The Clouds 2:36:28.3\n30-Shape Shifter 2:40:22.1\n31-Terrain 2:47:57.3\n32-Without Form 2:53:29.4\n33-Taking Shape 2:59:59.6\n34-Primordial Dream 3:04:19.9\n35-Parallel View 3:09:40.9"
-               }
-              },
-              "contentDetails": {
-               "duration": "PT3H15M14S",
-               "dimension": "2d",
-               "definition": "hd",
-               "caption": "false",
-               "licensedContent": false,
-               "projection": "rectangular"
-              }
-             }
-            ]
-           }
-           </textarea>
+          <span>Format from a Comment</span>
+          <textarea id="content_comment" name="content_comment"></textarea>
         </label>
       </p>
 
         <footer>
           <button id="controls_video_submit">Get Video Data</button>
-          <button id="controls_submit">Format JSON</button>
         </footer>
       </article>
       <aside>
@@ -129,14 +53,16 @@
       
       let video_data = { id: '', slug: '', title: '', tracks: [], duration: -1 };
 
-      let submitBtn = document.querySelector('#controls_submit');
       let videoSubmitBtn = document.querySelector('#controls_video_submit');
+      
       let videoUrlEl = document.querySelector('#content_id');
-      let unformattedEl = document.querySelector('#content_unformatted');
+      
       let formattedEl = document.querySelector('#content_formatted');
       let videoIdEl = document.querySelector('#video_id_output');
       let videoSlugEl = document.querySelector('#video_slug_output');
       let videoTitleEl = document.querySelector('#video_title_output');
+
+      let contentCommentEl = document.querySelector('#content_comment');
 
       videoSlugEl.addEventListener('change', onInputUpdate);
       videoTitleEl.addEventListener('change', onInputUpdate);
@@ -149,30 +75,22 @@
         let access_key = accessKeyEl.value;
         access_key = access_key.trim();
 
+        let comment_json = { comment: contentCommentEl.value };
+
         let video_url = videoUrlEl.value;
         let video_id = /v=([a-zA-Z0-9_-]+)/.exec(video_url);
         let json = {
-          method: 'GET',
-          headers: { authorization: `Bearer ${access_key}` }
+          method: 'POST',
+          body: JSON.stringify(comment_json),
+          headers: { 
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${access_key}` 
+          }
         }
 
         let response = await fetch(`/video/${video_id[1]}`, json);
         let data = await response.json();
 
-        onDataReceived(data);
-      }
-
-      
-      async function submitData() {
-        let album_json = unformattedEl.value;
-        let json = { 
-          method: 'POST', 
-          headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-          body: album_json
-        };
-
-        let response = await fetch(`/format`, json);
-        let data = await response.json();
         onDataReceived(data);
       }
 
@@ -204,7 +122,6 @@
         Prism.highlightAll();
       }
 
-      submitBtn.addEventListener('click', submitData);
       videoSubmitBtn.addEventListener('click', getVideoData);
     </script>
   </body>

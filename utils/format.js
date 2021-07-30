@@ -30,6 +30,14 @@ function utilityTimestamp( input ) {
 module.exports = {
   formatDuration: function(input) {
 
+    // check for missing minutes
+    let hourIndex = input.indexOf('H');
+    if ( hourIndex > -1 && input.indexOf('M') < 0 ){
+      
+      let hourIndexEnd = hourIndex+1;
+      input = input.slice(0,hourIndexEnd) + "00M" + input.slice(hourIndexEnd);
+    }
+
     let filters = [
       { lookFor: 'PT', replaceWith: ''},
       { lookFor: 'H', replaceWith: ':'},
@@ -55,7 +63,7 @@ module.exports = {
     for ( let i = 0; i < lines.length; i++ ) {
 
       let line = lines[i];
-      let digitsFollowedByColon = /\d{1,2}[\:]\d{1,2}/.exec(line);
+      let digitsFollowedByColon = /\d{1,2}[\:]\d{1,2}/g.exec(line);
       let alphaChars = /[a-zA-Z]/.exec(line);
 
       if ( digitsFollowedByColon && alphaChars ) {
@@ -72,7 +80,7 @@ module.exports = {
           time = line.substring(digitsFollowedByColon.index, alphaChars.index);
         } else {
           title = line.substring(alphaChars.index, digitsFollowedByColon.index);
-          time = line.substring(digitsFollowedByColon.index);
+          time = line.substr(digitsFollowedByColon.index, digitsFollowedByColon[0].length);
         }
     
         // trim whitespace from title:

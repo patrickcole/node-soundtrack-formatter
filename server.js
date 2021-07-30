@@ -31,6 +31,8 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+
+
 function handleAPIData(item) {
 
   let video_duration = item.contentDetails.duration;
@@ -43,10 +45,12 @@ function handleAPIData(item) {
 
   let video_slug = slugify(video_title).toLowerCase();
 
-
-  let message = { title: video_title, slug: video_slug, embed: item.id, tracks: tracks, duration: video_duration_in_seconds };
+  let message = { 
+    title: video_title, slug: video_slug, embed: item.id, tracks: tracks, duration: video_duration_in_seconds };
   return { success: true, json: message };
 }
+
+
 
 const checkJwt = jwt(
   {
@@ -66,20 +70,6 @@ const checkJwt = jwt(
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'static')));
-
-app.post('/format', (req,res) => {
-
-  let item = req.body.items[0];
-  let payload = handleAPIData(item);
-  res.json(payload);
-});
-
-
-
-app.get('/video/', (req,res) => {
-  res.json({ success: false, message: "Please enter a valid video id" });
-});
-
 app.use(checkJwt);
 app.use(function (err, req, res, next) {
   if (err.name === 'UnauthorizedError') {
@@ -87,26 +77,29 @@ app.use(function (err, req, res, next) {
   }
 });
 
+app.post('/video/:embed', (req,res) => {
+  
+  if ( req.params.embed !== "" ) {
 
-
-app.get('/video/:embed', (req,res) => {
-
-  if ( req.params.embed !== "" ){
     youtube(req.params.embed)
-    .then( (item) => {
-      
-      let payload = handleAPIData(item);
-      res.json(payload);
-    })
-    .catch( (error) => {
-      res.json( { success: false, message: error } );
-    })
+      .then( (item) => {
+
+        // if a comment is preferred to the description
+        // it will replace the description inside the item:
+        if ( req.body.comment !== "" ){
+          item.snippet.description = req.body.comment;
+        }
+
+        let payload = handleAPIData(item);
+        res.json(payload);
+      })
+      .catch( (error) => {
+        res.json( { success: false, message: error } );
+      })
   } else {
     res.json({ success: false, message: "Please enter a valid video id" });
   }
 });
 
-
-
-const port = process.env.port || 5000;
+const port = process.env.port || 3001;
 app.listen( port, () => console.log(`The Express application is running and reporting on port ${port}`));
